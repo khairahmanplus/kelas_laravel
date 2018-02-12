@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" id="title" name="title" value="" autofocus>
+                    <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" id="title" name="title" value="{{ old('title') }}" autofocus>
                     <small class="form-text text-muted">
                         Tajuk kepada post
                     </small>
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" name="description" value="">
+                    <input type="text" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" name="description" value="{{ old('description') }}">
                     <small class="form-text text-muted">
                         Penerangan post
                     </small>
@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" id="content" rows="8"></textarea>
+                    <textarea name="content" class="form-control {{ $errors->has('content') ? ' is-invalid' : '' }}" id="content" rows="8">{{ old('content') }}</textarea>
                     @if ($errors->has('content'))
                         <span class="invalid-feedback">
                             {{ $errors->first('content') }}
@@ -61,7 +61,16 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script type="text/javascript">
+    $('#content').summernote({
+        tabsize: 4,
+        height: 500,
+        popover: {
+            image: [],
+            link: [],
+            air: []
+       }
+    });
 </script>
 @endsection
